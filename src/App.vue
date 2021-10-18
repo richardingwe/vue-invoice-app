@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="app flex">
+		<div class="app flex flex-column">
 			<Navigation />
 			<div class="app-content flex flex-column">
 				<router-view />
