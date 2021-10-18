@@ -1,7 +1,51 @@
 <template>
-	<h1>
-		Invoice
-	</h1>
+	<div
+		@click="checkClick"
+		ref="invoiceWrap"
+		class="invoice-wrap flex flex-column"
+	>
+		<form @submit.prevent="submitForm" class="invoice-content">
+			<!-- Bill from -->
+			<div class="bill-from flex flex-column">
+				<h4>Bill From</h4>
+				<div class="input flex flex-column">
+					<label for="billersStreetAddress">Street Address</label>
+					<input
+						type="text"
+						required
+						id="billersStreetAddress"
+						v-model="billersStreetAddress"
+					/>
+				</div>
+				<div class="location-details flex">
+					<div class="input flex flex-column">
+						<label for="billerCity">City</label>
+						<input type="text" required id="billerCity" v-model="billerCity" />
+					</div>
+					<div class="input flex flex-column">
+						<label for="billersZipCode">Zip Code</label>
+						<input
+							type="text"
+							required
+							id="billersZipCode"
+							v-model="billersZipCode"
+						/>
+					</div>
+					<div class="input flex flex-column">
+						<label for="billerCountry">Country</label>
+						<input
+							type="text"
+							required
+							id="billerCountry"
+							v-model="billerCountry"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- Bill To -->
+		</form>
+	</div>
 </template>
 
 <script>
