@@ -7,7 +7,7 @@
 				<span>There are 4 total invoices</span>
 			</div>
 			<div class="right flex">
-				<div @click="toggleFilterMenu" class="filter flex" ref="filter">
+				<div @click="toggleFilterMenu" class="filter flex">
 					<span>Filter by status</span>
 					<img src="@/assets/icon-arrow-down.svg" alt="" />
 					<ul v-show="filterMenu" class="filter-menu">
@@ -31,7 +31,18 @@
 <script>
 	export default {
 		name: 'Home',
+		data() {
+			return {
+				filterMenu: null,
+			};
+		},
 		components: {},
+		methods: {
+			newInvoice() {},
+			toggleFilterMenu() {
+				this.filterMenu = !this.filterMenu;
+			},
+		},
 	};
 </script>
 
