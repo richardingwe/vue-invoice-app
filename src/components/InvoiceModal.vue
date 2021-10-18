@@ -63,29 +63,110 @@
 						v-model="clientStreetAddress"
 					/>
 				</div>
+				<div class="location-details flex">
+					<div class="input flex flex-column">
+						<label for="clientCity">City</label>
+						<input type="text" required id="clientCity" v-model="clientCity" />
+					</div>
+					<div class="input flex flex-column">
+						<label for="clientZipCode">Zip Code</label>
+						<input
+							type="text"
+							required
+							id="clientZipCode"
+							v-model="clientZipCode"
+						/>
+					</div>
+					<div class="input flex flex-column">
+						<label for="clientCountry">Country</label>
+						<input
+							type="text"
+							required
+							id="clientCountry"
+							v-model="clientCountry"
+						/>
+					</div>
+				</div>
 			</div>
-			<div class="location-details flex">
-				<div class="input flex flex-column">
-					<label for="clientCity">City</label>
-					<input type="text" required id="clientCity" v-model="clientCity" />
+
+			<!-- Invoice Work Details -->
+			<div class="invoice-work flex flex-column">
+				<div class="payment flex">
+					<div class="input flex flex-column">
+						<label for="invoiceDate">Invoice Date</label>
+						<input
+							disabled
+							type="text"
+							required
+							id="invoiceDate"
+							v-model="invoiceDate"
+						/>
+					</div>
+					<div class="input flex flex-column">
+						<label for="paymentDueDate">Payment Due</label>
+						<input
+							disabled
+							type="text"
+							required
+							id="paymentDueDate"
+							v-model="paymentDueDate"
+						/>
+					</div>
 				</div>
 				<div class="input flex flex-column">
-					<label for="clientZipCode">Zip Code</label>
+					<label for="paymentTerms">Payment Terms</label>
+					<select type="text" required id="paymentTerms" v-model="paymentTerms">
+						<option value="30">Net 30 Days</option>
+						<option value="60">Net 60 Days</option>
+					</select>
+				</div>
+				<div class="input flex flex-column">
+					<label for="productDescription">Product Description</label>
 					<input
 						type="text"
 						required
-						id="clientZipCode"
-						v-model="clientZipCode"
+						id="productDescription"
+						v-model="productDescription"
 					/>
 				</div>
-				<div class="input flex flex-column">
-					<label for="clientCountry">Country</label>
-					<input
-						type="text"
-						required
-						id="clientCountry"
-						v-model="clientCountry"
-					/>
+				<div class="work-items">
+					<h3>Item List</h3>
+					<table class="item-List">
+						<tr class="table-heading flex">
+							<th class="item-name">Item Name</th>
+							<th class="qty">Qty</th>
+							<th class="price">Price</th>
+							<th class="total">Total</th>
+						</tr>
+						<tr
+							class="table-items flex"
+							v-for="(item, index) in invoiceItemList"
+							:key="index"
+						>
+							<td class="item-name">
+								<input type="text" v-model="item.itemName" />
+							</td>
+							<td class="qty">
+								<input type="text" v-model="item.qty" />
+							</td>
+							<td class="price">
+								<input type="text" v-model="item.price" />
+							</td>
+							<td class="total flex">
+								${{ (item.total = item.qty * item.price) }}
+							</td>
+							<img
+								@click="deleteInvoiceItem(item.id)"
+								src="@/assets/icon-delete.svg"
+								alt=""
+							/>
+						</tr>
+					</table>
+
+					<div @click="addNewInvoiceItem" class="flex button">
+						<img src="@/assets/icon-plus.svg" alt="" />
+						Add New Item
+					</div>
 				</div>
 			</div>
 		</form>
