@@ -183,6 +183,7 @@
 </template>
 
 <script>
+	import db from '../firebase/firebaseInit';
 	import { mapMutations } from 'vuex';
 	import { uid } from 'uid';
 	export default {
@@ -269,6 +270,35 @@
 				}
 
 				this.calInvoiceTotal();
+
+				const dataBase = db.collection('invoice').doc();
+
+				await dataBase.set({
+					invoiceId: uid(6),
+					billerStreetAddress: this.billerStreetAddress,
+					billerCity: this.billerCity,
+					billerZipCode: this.billerZipCode,
+					billerCountry: this.billerCountry,
+					clientName: this.clientName,
+					clientEmail: this.clientEmail,
+					clientStreetAddress: this.clientStreetAddress,
+					clientCity: this.clientCity,
+					clientZipCode: this.clientZipCode,
+					clientCountry: this.clientCountry,
+					invoiceDate: this.invoiceDate,
+					invoiceDateUnix: this.invoiceDateUnix,
+					paymentTerms: this.paymentTerms,
+					paymentDueDate: this.paymentDueDate,
+					paymentDueDateUnix: this.paymentDueDateUnix,
+					productDescription: this.productDescription,
+					invoiceItemList: this.invoiceItemList,
+					invoiceTotal: this.invoiceTotal,
+					invoicePending: this.invoicePending,
+					invoiceDraft: this.invoiceDraft,
+					invoicePaid: null,
+				});
+
+				this.TOGGLE_INVOICE();
 			},
 
 			submitForm() {
