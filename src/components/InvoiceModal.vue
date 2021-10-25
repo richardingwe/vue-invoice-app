@@ -97,7 +97,6 @@
 						<input
 							disabled
 							type="text"
-							required
 							id="invoiceDate"
 							v-model="invoiceDate"
 						/>
@@ -107,7 +106,6 @@
 						<input
 							disabled
 							type="text"
-							required
 							id="paymentDueDate"
 							v-model="paymentDueDate"
 						/>
@@ -115,7 +113,7 @@
 				</div>
 				<div class="input flex flex-column">
 					<label for="paymentTerms">Payment Terms</label>
-					<select type="text" required id="paymentTerms" v-model="paymentTerms">
+					<select required type="text" id="paymentTerms" v-model="paymentTerms">
 						<option value="30">Net 30 Days</option>
 						<option value="60">Net 60 Days</option>
 					</select>
@@ -123,20 +121,20 @@
 				<div class="input flex flex-column">
 					<label for="productDescription">Product Description</label>
 					<input
-						type="text"
 						required
+						type="text"
 						id="productDescription"
 						v-model="productDescription"
 					/>
 				</div>
 				<div class="work-items">
 					<h3>Item List</h3>
-					<table class="item-List">
+					<table class="item-list">
 						<tr class="table-heading flex">
 							<th class="item-name">Item Name</th>
 							<th class="qty">Qty</th>
 							<th class="price">Price</th>
-							<th class="total">Total</th>
+							<th class="total">Toal</th>
 						</tr>
 						<tr
 							class="table-items flex"
@@ -146,12 +144,8 @@
 							<td class="item-name">
 								<input type="text" v-model="item.itemName" />
 							</td>
-							<td class="qty">
-								<input type="text" v-model="item.qty" />
-							</td>
-							<td class="price">
-								<input type="text" v-model="item.price" />
-							</td>
+							<td class="qty"><input type="text" v-model="item.qty" /></td>
+							<td class="price"><input type="text" v-model="item.price" /></td>
 							<td class="total flex">
 								${{ (item.total = item.qty * item.price) }}
 							</td>
@@ -190,6 +184,7 @@
 
 <script>
 	import { mapMutations } from 'vuex';
+	import { uid } from 'uid';
 	export default {
 		name: 'invoiceModal',
 		data() {
@@ -233,6 +228,20 @@
 			...mapMutations(['TOGGLE_INVOICE']),
 			closeInvoice() {
 				this.TOGGLE_INVOICE();
+			},
+			addNewInvoiceItem() {
+				this.invoiceItemList.push({
+					id: uid(),
+					itemName: '',
+					qty: '',
+					price: 0,
+					total: 0,
+				});
+			},
+			deleteInvoiceItem(id) {
+				this.invoiceItemList = this.invoiceItemList.filter(
+					(item) => item.id !== id
+				);
 			},
 		},
 		watch: {
