@@ -243,6 +243,9 @@
 					(item) => item.id !== id
 				);
 			},
+			publishInvoice() {
+				this.invoicePending = true;
+			},
 		},
 		watch: {
 			paymentTerms() {
