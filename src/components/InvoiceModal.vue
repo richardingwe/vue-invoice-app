@@ -219,6 +219,16 @@
 				invoiceTotal: 0,
 			};
 		},
+		created() {
+			// get current date for invoice date field
+			if (!this.editInvoice) {
+				this.invoiceDateUnix = Date.now();
+				this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
+					'en-us',
+					this.dateOptions
+				);
+			}
+		},
 		methods: {
 			...mapMutations(['TOGGLE_INVOICE']),
 			closeInvoice() {
