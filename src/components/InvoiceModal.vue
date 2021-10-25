@@ -226,9 +226,11 @@
 		},
 		methods: {
 			...mapMutations(['TOGGLE_INVOICE']),
+
 			closeInvoice() {
 				this.TOGGLE_INVOICE();
 			},
+
 			addNewInvoiceItem() {
 				this.invoiceItemList.push({
 					id: uid(),
@@ -238,16 +240,43 @@
 					total: 0,
 				});
 			},
+
 			deleteInvoiceItem(id) {
 				this.invoiceItemList = this.invoiceItemList.filter(
 					(item) => item.id !== id
 				);
 			},
+
+			calInvoiceTotal() {
+				this.invoiceTotal = 0;
+				this.invoiceItemList.forEach((item) => {
+					this.invoiceTotal += item.total;
+				});
+			},
+
 			publishInvoice() {
 				this.invoicePending = true;
 			},
+
 			saveDraft() {
 				this.invoiceDraft = true;
+			},
+
+			async uploadInvoice() {
+				if (this.invoiceItemList.length <= 0) {
+					alert('Please ensure you filled out work items!');
+					return;
+				}
+
+				this.calInvoiceTotal();
+			},
+
+			submitForm() {
+				if (this.editInvoice) {
+					this.updateInvoice();
+					return;
+				}
+				this.uploadInvoice();
 			},
 		},
 		watch: {
