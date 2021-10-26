@@ -3,7 +3,7 @@
 		<div v-if="!mobile" class="app flex flex-column">
 			<Navigation />
 			<div class="app-content flex flex-column">
-				<Modal />
+				<Modal v-if="modalActive" />
 				<transition name="invoice">
 					<InvoiceModal v-if="invoiceModal" />
 				</transition>
@@ -48,7 +48,7 @@
 			},
 		},
 		computed: {
-			...mapState(['invoiceModal']),
+			...mapState(['invoiceModal', 'modalActive']),
 		},
 	};
 </script>
