@@ -15,10 +15,15 @@
 	export default {
 		name: 'modal',
 		methods: {
-			...mapMutations(['TOGGLE_MODAL']),
+			...mapMutations(['TOGGLE_MODAL', 'TOGGLE_INVOICE']),
 
 			closeModal() {
 				this.TOGGLE_MODAL();
+			},
+
+			closeInvoice() {
+				this.TOGGLE_MODAL();
+				this.TOGGLE_INVOICE();
 			},
 		},
 	};
