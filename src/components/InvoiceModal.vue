@@ -137,7 +137,7 @@
 							<th class="item-name">Item Name</th>
 							<th class="qty">Qty</th>
 							<th class="price">Price</th>
-							<th class="total">Toal</th>
+							<th class="total">Total</th>
 						</tr>
 						<tr
 							class="table-items flex"
@@ -170,13 +170,15 @@
 			<!-- Save/Exit -->
 			<div class="save flex">
 				<div class="left">
-					<button @click="closeInvoice" class="red">Cancel</button>
+					<button type="button" @click="closeInvoice" class="red">
+						Cancel
+					</button>
 				</div>
 				<div class="right flex">
-					<button @click="saveDraft" class="dark-purple">
+					<button type="submit" @click="saveDraft" class="dark-purple">
 						Save Draft
 					</button>
-					<button @click="publishInvoice" class="purple">
+					<button type="submit" @click="publishInvoice" class="purple">
 						Create Invoice
 					</button>
 				</div>
@@ -276,6 +278,8 @@
 					return;
 				}
 
+				this.loading = true;
+
 				this.calInvoiceTotal();
 
 				const dataBase = db.collection('invoice').doc();
@@ -305,6 +309,7 @@
 					invoicePaid: null,
 				});
 
+				this.loading = false;
 				this.TOGGLE_INVOICE();
 			},
 
