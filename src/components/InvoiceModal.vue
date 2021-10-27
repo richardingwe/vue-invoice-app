@@ -17,7 +17,7 @@
 						type="text"
 						required
 						id="billersStreetAddress"
-						v-model="billersStreetAddress"
+						v-model="billerStreetAddress"
 					/>
 				</div>
 				<div class="location-details flex">
@@ -31,7 +31,7 @@
 							type="text"
 							required
 							id="billersZipCode"
-							v-model="billersZipCode"
+							v-model="billerZipCode"
 						/>
 					</div>
 					<div class="input flex flex-column">
@@ -288,7 +288,7 @@
 
 				this.calInvoiceTotal();
 
-				const dataBase = db.collection('invoice').doc();
+				const dataBase = db.collection('invoices').doc();
 
 				await dataBase.set({
 					invoiceId: uid(6),
