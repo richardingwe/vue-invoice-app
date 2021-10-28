@@ -26,12 +26,19 @@
 			</div>
 		</div>
 		<!-- Invoices -->
-		<div>
+		<div v-if="invoiceData.length > 0">
 			<Invoice
 				v-for="(invoice, index) in invoiceData"
 				:invoice="invoice"
 				:key="index"
 			/>
+		</div>
+		<div v-else class="empty flex flex-column">
+			<img src="@/assets/illustration-empty.svg" alt="" />
+			<h3>There is nothing here</h3>
+			<p>
+				Create a new invoice by clicking the New Invoice button and get started
+			</p>
 		</div>
 	</div>
 </template>
