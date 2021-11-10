@@ -6,6 +6,11 @@
 	import { mapMutations, mapState } from 'vuex';
 	export default {
 		name: 'invoiceView',
+		data() {
+			return {
+				currentInvoice: null,
+			};
+		},
 		methods: {
 			...mapMutations(['SET_CURRENT_INVOICE']),
 
