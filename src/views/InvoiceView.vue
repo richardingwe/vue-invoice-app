@@ -41,6 +41,7 @@
 				</button>
 			</div>
 		</div>
+
 		<!-- Invoice Details -->
 		<div class="invoice-details flex flex-column">
 			<div class="top flex">
